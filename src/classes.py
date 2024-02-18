@@ -12,7 +12,7 @@ class Category:
         self.name = name
         self.descr = descr
 
-        # Список названий продуктов, который должен быть не пустым и  уникальным для каждого нового экземпляра класса Category
+        # Список объектов класса Product
 
         self.products = products
 
