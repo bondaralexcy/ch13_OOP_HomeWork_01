@@ -22,6 +22,9 @@ def test_category_init(class_category):
     assert class_category.category_count == 1
     assert class_category.products_count == 1
 
+def test_category_len(class_category):
+    assert len(class_category) == 1
+
 
 def test_get_name(class_category):
     assert class_category.get_name() == 'Смартфоны'
@@ -51,6 +54,8 @@ def test_product_init(class_product):
     assert class_product.price == 180000.0
     assert class_product.quantity == 5
 
+def test_category_len(class_product):
+    assert len(class_product) == 5
 
 def test_product_name(class_product):
     assert class_product.get_product_name() == 'Samsung Galaxy C23 Ultra'
