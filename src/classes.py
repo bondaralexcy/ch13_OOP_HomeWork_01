@@ -18,6 +18,12 @@ class Category:
         Category.category_count += 1
         Category.products_count += len(products)
 
+    def __str__(self):
+        return f'Класс: {__class__.__name__} \n  {self.name} \n  {self.description} \n  Количество: {Category.products_count}'
+
+    def __len__(self):
+        return Category.products_count
+
     def get_name(self):
         return self.name
 
@@ -59,6 +65,16 @@ class Product:
         self.description = description
         self._price = price
         self.quantity = quantity
+
+    def __str__(self):
+        return f'Класс: {__class__.__name__} \n  {self.name} \n  {self.description} \n  Цена: {self.price} \n  Количество: {self.quantity}'
+
+    def __len__(self):
+        return self.quantity
+
+    def __add__(self, other):
+        return self.quantity + other.quantity
+
 
     def get_product_name(self):
         return self.name
