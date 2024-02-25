@@ -1,5 +1,5 @@
 
-from src.classes import Category, Product
+from src.classes import Category, Product, CategoryIter
 from src.utils import load_data
 def main():
     """
@@ -18,7 +18,9 @@ def main():
         # Создаем объекты класса Category. Присваиваем их переменным category_1, category_2
         locals()[f'category_{i}'] = Category(unit["name"], unit["description"], unit["products"])
         print(f'++++++++++++++ category_{i} ++++++++++++++')
-        print(len(locals()[f'category_{i}']))
+        # Проверка метода __len__
+        print(f'Количество классов Product в категории: {len(locals()[f"category_{i}"])}')
+        # Проверка метода __str__
         print(locals()[f'category_{i}'])
         i += 1
 
@@ -26,12 +28,22 @@ def main():
             # Создаем объекты класса Product. Присваиваем их переменным product_1, product_2 итд
             locals()[f'product_{j}'] = Product(element["name"], element["description"], element["price"], element["quantity"])
             print(f'------------ product_{j} -----------------')
-            print(len(locals()[f'product_{j}']))
+            # Проверка метода __len__
+            print(f'Количество продуктов на складе: {len(locals()[f"product_{j}"])}')
+            # Проверка метода __str__
             print(locals()[f'product_{j}'])
             j += 1
 
     # Проверяем работу методов классов
+    print('\nПроверка итерации')
+    prod_dict = CategoryIter(locals()[f'category_{1}'])
+    for pd in prod_dict:
+        print(pd.get('name'))
+
+    print('\nПроверка сложения объектов')
     print(f'product_1 + product_2 = {locals()['product_1'] + locals()['product_2']}')
+
+    print('\nПроверка декоратора price')
     print(f"Старая цена: {locals()['product_2'].price}")
     locals()['product_2'].price = 30000
     print(f"Новая цена: {locals()['product_2'].price}")

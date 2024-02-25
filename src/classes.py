@@ -19,7 +19,9 @@ class Category:
         Category.products_count += len(products)
 
     def __str__(self):
-        return f'Класс: {__class__.__name__} \n  {self.name} \n  {self.description} \n  Количество: {Category.products_count}'
+        #Название категории, количество продуктов: 200 шт.
+        # return f'Класс: {__class__.__name__} \n  {self.name}, количество продуктов: {Category.products_count} шт.'
+        return f'Класс: {__class__.__name__} \n  {self.name}, количество продуктов: {len(self.name)} шт.'
 
     def __len__(self):
         return Category.products_count
@@ -67,13 +69,14 @@ class Product:
         self.quantity = quantity
 
     def __str__(self):
-        return f'Класс: {__class__.__name__} \n  {self.name} \n  {self.description} \n  Цена: {self.price} \n  Количество: {self.quantity}'
+        return f'Класс: {__class__.__name__} \n  {self.name},  {self.price} руб.  Остаток: {self.quantity}'
 
     def __len__(self):
         return self.quantity
 
     def __add__(self, other):
-        return self.quantity + other.quantity
+        # результат выполнения сложения двух продуктов - сложение сумм, умноженных на количество на складе
+        return self.price * self.quantity + other.price * other.quantity
 
 
     def get_product_name(self):
@@ -120,4 +123,30 @@ class Product:
                     break
         else:
             self._price = value
+
+
+
+class CategoryIter:
+    """
+    Класс итерации продуктов в заданной категории
+    """
+    ctg: Category
+    def __init__(self, ctg):
+        self.ctg = ctg
+    def __iter__(self):
+        self.stop_num = len(self.ctg)
+        self.cur_value = -1
+        self.product_list = []
+        # Записываем все объекты данной категории в список словарей product_list
+        self.product_list = self.ctg.get_products()
+        return self
+
+    def __next__(self):
+        if self.cur_value + 1 < self.stop_num - 1:
+            self.cur_value += 1
+            return self.product_list[self.cur_value]
+        else:
+            raise StopIteration
+
+
 
