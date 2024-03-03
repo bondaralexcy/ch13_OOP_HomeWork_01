@@ -20,11 +20,13 @@ class Category:
 
     def __str__(self):
         #Название категории, количество продуктов: 200 шт.
-        # return f'Класс: {__class__.__name__} \n  {self.name}, количество продуктов: {Category.products_count} шт.'
-        return f'Класс: {__class__.__name__} \n  {self.name}, количество продуктов: {len(self.name)} шт.'
+        return f'Класс: {__class__.__name__} \n  {self.name}, количество продуктов: {Category.products_count} шт.'
+        # return f'Класс: {__class__.__name__} \n  {self.name}, количество продуктов: {len(self.name)} шт.'
 
     def __len__(self):
-        return Category.products_count
+        # return Category.products_count
+        return len(self.get_products())
+
 
     def get_name(self):
         return self.name
@@ -32,7 +34,7 @@ class Category:
     def get_description(self):
         return self.description
 
-    def get_products(self):
+    def get_products(self) -> list:
         return self.__products
 
     def add_products(self, value):
@@ -137,12 +139,12 @@ class CategoryIter:
         self.stop_num = len(self.ctg)
         self.cur_value = -1
         self.product_list = []
-        # Записываем все объекты данной категории в список словарей product_list
+        # Записываем все объекты данной категории в список product_list
         self.product_list = self.ctg.get_products()
         return self
 
     def __next__(self):
-        if self.cur_value + 1 < self.stop_num - 1:
+        if self.cur_value + 1 < self.stop_num:
             self.cur_value += 1
             return self.product_list[self.cur_value]
         else:
