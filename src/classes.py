@@ -20,8 +20,7 @@ class Category:
 
     def __str__(self):
         #Название категории, количество продуктов: 200 шт.
-        return f'Класс: {__class__.__name__} \n  {self.name}, количество продуктов: {Category.products_count} шт.'
-        # return f'Класс: {__class__.__name__} \n  {self.name}, количество продуктов: {len(self.name)} шт.'
+        return f'Класс: {__class__.__name__} \n  {self.name}, количество продуктов: {len(self)} шт.'
 
     def __len__(self):
         # return Category.products_count
@@ -37,8 +36,14 @@ class Category:
     def get_products(self) -> list:
         return self.__products
 
-    def add_products(self, value):
-        """Метод добавляет продукт в список продуктов __products"""
+
+    def add_product(self, value):
+        """Метод добавляет продукт в список продуктов __products
+            Доработан по требованию задания 15.1 чтобы не было возможности добавить
+            вместо продукта или его наследников любой другой объект"""
+        if not isinstance(value, Product):
+            raise TypeError("Добавлять можно только объекты класса Product и его наследников")
+
         self.__products.append(value)
         Category.products_count += 1
 
@@ -78,6 +83,12 @@ class Product:
 
     def __add__(self, other):
         # результат выполнения сложения двух продуктов - сложение сумм, умноженных на количество на складе
+        # Доработать функционал сложения таким образом, чтобы можно было складывать товары только из одинаковых классов продуктов.
+        # То есть если складывать товар класса «Смартфон» и товар класса «Продукт», то должна быть ошибка типа.
+
+        if not (type(self) == type(other)):
+            raise TypeError("Складывать можно объекты только из одной категории товаров")
+
         return self.price * self.quantity + other.price * other.quantity
 
 

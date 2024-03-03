@@ -1,7 +1,7 @@
 import pytest
 
 from src.classes import Category, Product
-
+from src.child_classes import Smartphone, Garden_grass
 
 @pytest.fixture
 def class_category():
@@ -71,3 +71,19 @@ def test_product_price(class_product):
 
 def test_product_quantity(class_product):
     assert class_product.get_product_quantity() == 5
+
+
+@pytest.fixture
+def class_smartphone():
+    return Smartphone("Xiaomi Redmi Note 11", "1024GB, Серебристый", 32500.0, 2, "10M fps", "Note 11", "1024GB", "Серебристый")
+
+
+@pytest.fixture
+def class_grass():
+    return Garden_grass("Овсяница красная", "Овсяница красная (Festuca rubra L.) - корневищный и рыхлокустовой низовой многолетний злак, вид травянистых растений семейства злаковых высотой до 60см",
+                        500, 1700, "Россия", "1 мес.","Красноватый")
+
+def test_add_method(class_smartphone, class_grass):
+    """ Тест метода сложения разных классов объектов"""
+    with pytest.raises(TypeError):
+        class_smartphone + class_grass

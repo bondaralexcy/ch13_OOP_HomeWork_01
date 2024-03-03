@@ -12,6 +12,6 @@ def load_data(fn: str):
         data = json.load(read_data)
         return data
 
-
+#
 # dt = load_data('products.json')
 # print(dt)
