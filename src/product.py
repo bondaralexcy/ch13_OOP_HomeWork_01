@@ -15,6 +15,19 @@ class BaseProduct(ABC):
     def get_product_name(self):
         pass
 
+
+class MixinRepr:
+    """ Миксин-класс для вывода информации в консоль о том, что был создан объект. """
+
+    def __init__(self, *args, **kwargs):
+        print(repr(self))
+
+    def __repr__(self):
+        # логика с использованием self.__dict__.items()
+        attrs = ', '.join([f"{attr}={getattr(self, attr)}" for attr in self.__dict__])
+        return f"Создан объект: {self.__class__.__name__} ({attrs})"
+
+
 class Product(BaseProduct):
     """
         Класс Product - родительский класс для остальных продуктов
@@ -28,10 +41,12 @@ class Product(BaseProduct):
         """Метод для инициализации экземпляра класса Product. Задаем значения атрибутам экземпляра.
             Для атрибута price создал геттер и сеттер, поэтому переопределил его как защищенный
         """
+
         self.name = name
         self.description = description
         self._price = price
         self.quantity = quantity
+        super().__init__()
 
     def __str__(self):
         return f'Класс: {__class__.__name__} \n  {self.name},  {self.price} руб.  Остаток: {self.quantity}'
@@ -60,7 +75,7 @@ class Product(BaseProduct):
         return self.quantity
 
     @classmethod
-    def new_product(cls, value):
+    def new_product(cls, value: dict):
         """Метод класса создает и возвращает новый продукт
             value - словарь типа:
              {
@@ -72,6 +87,8 @@ class Product(BaseProduct):
         """
         name, description, price, quantity = (value["name"], value["description"], value["price"], value["quantity"])
         return cls(name, description, price, quantity)
+        # return cls(**value)   # Можно так?
+
 
     @property
     def price(self):

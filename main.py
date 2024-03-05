@@ -1,12 +1,12 @@
 
 from src.category import Category, CategoryIter
 from src.product import Product
-from src.child_classes import Smartphone, Garden_grass
+from src.child_classes import Smartphone, Garden_grass, AnyProduct
 
 
-def main():
+def common_check():
     #
-    # Проверки без загрузки из файла json
+    # Проверка создания объектов и манипуляции с ними без загрузки из файла json
     #
 
     smartphon_1 = Smartphone(
@@ -109,14 +109,14 @@ def main():
 
     print(f"Количество продуктов: {garden_grass_cat.products_count}")
 
-    tee_cap_1 = Product(
+    tee_cap_1 = AnyProduct(
             "Чайная пара кобальтовая",
             "Чашка чайная и блюдце кобальтовые производства ЛФЗ",
             2700,
             20
         )
 
-    tee_cap_2 = Product(
+    tee_cap_2 = AnyProduct(
             "Чайная пара белая",
             "Чашка чайная и блюдце белые, Китай, для микроволновки",
             700,
@@ -154,10 +154,41 @@ def main():
     print(f'product_1 + product_2 = {Grass1 + Grass2}')
     print(f'product_1 + product_2 = {smartphon_1 + Grass2}')
 
+
+def main():
+    smartphon = Smartphone(
+        "Xiaomi Redmi Note 11",
+        "1024GB, Серебристый",
+        32500.0,
+        2,
+        "10M fps",
+        "Note 11",
+        "1024GB",
+        "Серебристый"
+        )
+
+    grass = Garden_grass(
+        "Райграс многолетний",
+        "Райграс пастбищный (Lolium perenne L.) - низовой рыхлокустовой быстроукореняющийся многолетний злак высотой от 15 до 60см.",
+        300,
+        400,
+        "Россия",
+        "1 месяц",
+        "Красноватая"
+        )
+
+    cap = AnyProduct(
+            "Чайная пара белая",
+            "Чашка чайная и блюдце белые, Китай, для микроволновки",
+            700,
+            130
+        )
+
 if __name__ == '__main__':
     """
         Проверка работы классов
     """
     main()
 
+    # common_check()
 
