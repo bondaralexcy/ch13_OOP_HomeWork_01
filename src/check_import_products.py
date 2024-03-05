@@ -1,5 +1,7 @@
 from src.utils import load_data
-from src.classes import Category, Product, CategoryIter
+from src.category import Category, CategoryIter
+from src.product import Product
+
 
     # Загружаем данные из json-файла products.json
     # Инициализируем экземпляры классов Category и Product

@@ -1,5 +1,6 @@
 
-from src.classes import Category, Product, CategoryIter
+from src.category import Category, CategoryIter
+from src.product import Product
 from src.child_classes import Smartphone, Garden_grass
 
 
