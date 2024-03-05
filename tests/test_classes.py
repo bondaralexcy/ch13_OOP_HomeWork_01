@@ -1,6 +1,6 @@
 import pytest
 
-from src.classes import Category, Product
+from src.category import Category, Product
 from src.child_classes import Smartphone, Garden_grass
 
 @pytest.fixture

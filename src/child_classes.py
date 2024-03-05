@@ -1,17 +1,17 @@
 
-from src.classes import Product
+from src.product import Product, MixinRepr
 
-class Smartphone(Product):
+class Smartphone(Product, MixinRepr):
     """ Дочерний класс от базового класса Product"""
 
     def __init__(self, name, description, price, quantity, productivity: str, model: str, memory: str, color: str):
         """Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра."""
-        super().__init__(name, description, price, quantity)
         self.productivity = productivity    # Производительность
         self.model = model                  # Модель
         self.memory = memory                # Память
         self.color = color                  # Цвет
-
+        # Вызов  super().__init__ перенесен в конец, чтобы перед миксином были сформированы все атрибуты объекта
+        super().__init__(name, description, price, quantity)
     @classmethod
     def new_product(cls, value: dict):
         """Метод класса создает и возвращает новый продукт в категории Cмартфон
@@ -49,18 +49,14 @@ class Smartphone(Product):
 
 
 
-
-
-
-class Garden_grass(Product):
+class Garden_grass(Product, MixinRepr):
     """ Дочерний класс от базового класса Product"""
     def __init__(self, name, description, price, quantity, country: str, expiration: int, color: str):
         """Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра."""
-        super().__init__(name, description, price, quantity)
         self.country = country  # страна-производитель
         self.expiration = expiration  # срок прорастания
         self.color = color  # Цвет
-
+        super().__init__(name, description, price, quantity)
     @classmethod
     def new_product(cls, value: dict):
         """Метод класса создает и возвращает новый продукт в категории Газонная травав
@@ -92,3 +88,13 @@ class Garden_grass(Product):
 
     def get_color(self):
         return self.color
+
+
+class AnyProduct(Product, MixinRepr):
+    """ Дочерний класс от базового класса Product для произвольной категории продуктов"""
+
+    def __init__(self, name, description, price, quantity):
+        """Метод для инициализации экземпляра класса Product. Задаем значения атрибутам экземпляра.
+
+        """
+        super().__init__(name, description, price, quantity)
