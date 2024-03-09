@@ -167,7 +167,7 @@ def common_check():
     # print(f'Grass1 + cap = {Grass1 + cap}')
 
 def main():
-    smartphon = Smartphone(
+    smartphon_1 = Smartphone(
         "Xiaomi Redmi Note 11",
         "1024GB, Серебристый",
         32500.0,
@@ -178,12 +178,18 @@ def main():
         "Серебристый"
         )
 
+    print(smartphon_1.get_product_name())
+    print(len(smartphon_1))
+    print(smartphon_1.get_product_quantity())
+    print(smartphon_1.get_product_description())
+    print(smartphon_1.get_memory())
+
     smartphon_3 = Smartphone.new_product(
             {
                 "name": "Xiaomi Redmi Note 12",
                 "description": "1024GB, Синий",
                 "price": 50000,
-                "quantity": 0,
+                "quantity": 25,
                 "productivity": "20M fps",
                 "model": "Note 12",
                 "memory": "2048GB",
@@ -207,16 +213,16 @@ def main():
     #         130
     #     )
     #
-    cat = Category("Смартфоны", "Новые поступления на склад", [smartphon])
+    cat = Category("Смартфоны", "Новые поступления на склад", [smartphon_3])
     print(cat)
-    cat.add_product(smartphon_3)
+    cat.add_product(smartphon_1)
     print(cat)
 
 if __name__ == '__main__':
     """
         Проверка работы классов
     """
-    # main()
+    main()
 
-    common_check()
+    # common_check()
 

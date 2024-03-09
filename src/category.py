@@ -10,16 +10,19 @@ class Category:
 
     name: str
     description: str
-    products: list
+    __products: list
 
     def __init__(self, name: str, description: str, products: list):
-        """Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра."""
+        """Метод для инициализации экземпляра класса Category. Задаем значения атрибутам экземпляра."""
         self.name = name
         self.description = description
-        self.__products = products  # Список объектов класса Product
+        self.__products = []    # Пустой список объектов класса Product
+        # self.__products = products  # Список объектов класса Product
+        for product in products:
+            self.add_product(product)
 
         Category.category_count += 1
-        Category.products_count += len(products)
+        # Category.products_count += len(products)
 
     def __str__(self):
         #Название категории, количество продуктов: 200 шт.
@@ -103,4 +106,12 @@ class CategoryIter:
             raise StopIteration
 
 
+class ValueError(Exception):
+    """класс исключения """
+
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else 'Неизвестная ошибка.'
+
+    def __str__(self):
+        return self.message
 
