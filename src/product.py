@@ -59,10 +59,12 @@ class Product(BaseProduct):
         # Доработать функционал сложения таким образом, чтобы можно было складывать товары только из одинаковых классов продуктов.
         # То есть если складывать товар класса «Смартфон» и товар класса «Продукт», то должна быть ошибка типа.
 
-        if not (type(self) == type(other)):
+        # if not (type(self) == type(other)):
+        #     raise TypeError("Складывать можно объекты только из одной категории товаров")
+        if isinstance(other, Product):
+            return self.price * self.quantity + other.price * other.quantity
+        else:
             raise TypeError("Складывать можно объекты только из одной категории товаров")
-
-        return self.price * self.quantity + other.price * other.quantity
 
 
     def get_product_name(self):

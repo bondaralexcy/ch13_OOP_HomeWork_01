@@ -33,6 +33,19 @@ class Smartphone(Product, MixinRepr):
                 )
         return cls(name, description, price, quantity, productivity, model, memory, color)
 
+    def __str__(self):
+        return f'Класс: {__class__.__name__} \n  {self.name},  {self.price} руб.  Остаток: {self.quantity}'
+
+    def __add__(self, other):
+        # результат выполнения сложения двух продуктов - сложение сумм, умноженных на количество на складе
+        # Доработать функционал сложения таким образом, чтобы можно было складывать товары только из одинаковых классов продуктов.
+        # То есть если складывать товар класса «Смартфон» и товар класса «Продукт», то должна быть ошибка типа.
+
+        if isinstance(other, Smartphone):
+            return self.price * self.quantity + other.price * other.quantity
+        else:
+            raise TypeError("Складывать можно объекты только из одной категории товаров")
+
 
     # Добавляем особые методы для данной категории продуктов
     def get_productivity(self):
@@ -72,11 +85,26 @@ class Garden_grass(Product, MixinRepr):
             "color": "Серебристый"
             }
         """
-        name, description, price, quantity, country, expiration, color = (
-                value["name"], value["description"], value["price"], value["quantity"],
-                value["country"], value["expiration"], value["color"]
-                )
-        return cls(name, description, price, quantity, country, expiration, color)
+        # name, description, price, quantity, country, expiration, color = (
+        #         value["name"], value["description"], value["price"], value["quantity"],
+        #         value["country"], value["expiration"], value["color"]
+        #         )
+        # return cls(name, description, price, quantity, country, expiration, color)
+
+        return cls(**value)   # Можно так?
+
+    def __str__(self):
+        return f'Класс: {__class__.__name__} \n  {self.name},  {self.price} руб.  Остаток: {self.quantity}'
+
+    def __add__(self, other):
+        # результат выполнения сложения двух продуктов - сложение сумм, умноженных на количество на складе
+        # Доработать функционал сложения таким образом, чтобы можно было складывать товары только из одинаковых классов продуктов.
+        # То есть если складывать товар класса «Смартфон» и товар класса «Продукт», то должна быть ошибка типа.
+
+        if isinstance(other, Garden_grass):
+            return self.price * self.quantity + other.price * other.quantity
+        else:
+            raise TypeError("Складывать можно объекты только из одной категории товаров")
 
     # Добавляем особые методы для данной категории продуктов
     def get_country(self):

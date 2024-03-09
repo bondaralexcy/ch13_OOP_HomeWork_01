@@ -46,14 +46,14 @@ def common_check():
 
 
 
-    # print(smartphon_1)
+    print(smartphon_1)
     # print(len(smartphon_1))
     # print(smartphon_1.get_product_name())
     # print(smartphon_1.get_product_quantity())
     # print(smartphon_1.get_product_description())
     # print(smartphon_1.get_memory())
     #
-    # print(smartphon_2)
+    print(smartphon_2)
     #
     # print(smartphon_3)
     # print(smartphon_3.price)
@@ -69,10 +69,11 @@ def common_check():
     print(cat.get_description())
     print(cat.products_list)
 
-
+    print('\nИнициализация объекта Garden_grass')
     Grass1 = Garden_grass("Овсяница красная", "Овсяница красная (Festuca rubra L.) - корневищный и рыхлокустовой низовой многолетний злак, вид травянистых растений семейства злаковых высотой до 60см",
                         500, 1700, "Россия", "1 мес.","Красноватый")
 
+    print('\nДобавление нового продукта Garden_grass')
     Grass2 = Garden_grass.new_product(
             {
             "name": "Райграс многолетний",
@@ -80,7 +81,7 @@ def common_check():
             "price": 300,
             "quantity": 400,
             "country": "Россия",
-            "expiration": "Note 12",
+            "expiration": "15 дней",
             "color": "Синий"
             }
         )
@@ -92,6 +93,8 @@ def common_check():
     print(Grass2.get_product_quantity())
     print(Grass2.get_product_description())
     print(Grass2.get_country())
+
+    return
 
     garden_grass_cat = Category("Трава газонная", "Наличие в магазине", [Grass1])
 
@@ -149,11 +152,18 @@ def common_check():
         # print(pd.get('name'))
         print(pd.get_product_name())
 
+    cap = AnyProduct(
+            "Чайная пара белая",
+            "Чашка чайная и блюдце белые, Китай, для микроволновки",
+            700,
+            130
+        )
 
     print('\nПроверка сложения объектов')
-    print(f'product_1 + product_2 = {Grass1 + Grass2}')
-    print(f'product_1 + product_2 = {smartphon_1 + Grass2}')
-
+    print(f'Grass1 + Grass2 = {Grass1 + Grass2}')
+    print(f'Smartphon_3 + Smartphon_1 = {smartphon_3 + smartphon_1}')
+    # print(f'Smartphon_3 + Grass2 = {smartphon_3 + Grass2}')
+    # print(f'Grass1 + cap = {Grass1 + cap}')
 
 def main():
     smartphon = Smartphone(
@@ -188,7 +198,7 @@ if __name__ == '__main__':
     """
         Проверка работы классов
     """
-    main()
+    # main()
 
-    # common_check()
+    common_check()
 
