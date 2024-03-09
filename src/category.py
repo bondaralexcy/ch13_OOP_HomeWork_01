@@ -47,8 +47,12 @@ class Category:
         if not isinstance(value, Product):
             raise TypeError("Добавлять можно только объекты класса Product и его наследников")
 
-        self.__products.append(value)
-        Category.products_count += 1
+        if value.quantity == 0:
+            raise ValueError("Tовар с нулевым количеством не может быть добавлен")
+
+        else:
+            self.__products.append(value)
+            Category.products_count += 1
 
     @property
     def products_list(self):
