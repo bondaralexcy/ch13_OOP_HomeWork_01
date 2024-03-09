@@ -16,7 +16,7 @@ class Category:
         """Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра."""
         self.name = name
         self.description = description
-        self.__products = products
+        self.__products = products  # Список объектов класса Product
 
         Category.category_count += 1
         Category.products_count += len(products)
@@ -26,7 +26,7 @@ class Category:
         return f'Класс: {__class__.__name__} \n  {self.name}, количество продуктов: {len(self)} шт.'
 
     def __len__(self):
-        # return Category.products_count
+        # Длина определена как количество объектов в данной категории товаров
         return len(self.get_products())
 
 
@@ -37,6 +37,7 @@ class Category:
         return self.description
 
     def get_products(self) -> list:
+        # Возвращает список продуктов, сохраненных в данной категории
         return self.__products
 
 
@@ -62,7 +63,22 @@ class Category:
             list_product.append(f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n")
         return "".join(list_product)
 
-
+    def avg_price(self):
+        """
+            Метод подсчитывает средний ценник всех товаров.
+            С помощью исключений обработать случай, когда в категории нет товаров
+            и сумма всех товаров будет делиться на ноль.
+            В случае, если такое происходит, возвращать ноль.
+        """
+        total_sum = 0
+        total_quant = 0
+        try:
+            for product in self.__products:
+                total_sum += product.price * product.quantity
+                total_quant += product.quantity
+            return total_sum / total_quant
+        except ZeroDivisionError:
+            return 0
 
 class CategoryIter:
     """

@@ -35,7 +35,7 @@ def common_check():
             {
                 "name": "Xiaomi Redmi Note 12",
                 "description": "1024GB, Синий",
-                "price": 50000,
+                "price": 150000,
                 "quantity": 3,
                 "productivity": "20M fps",
                 "model": "Note 12",
@@ -55,19 +55,21 @@ def common_check():
     #
     print(smartphon_2)
     #
-    # print(smartphon_3)
+    print(smartphon_3)
     # print(smartphon_3.price)
     # smartphon_3.price = 55000
     # print(smartphon_3.price)
 
-    cat = Category("Смартфоны", "Новые поступления на склад", [smartphon_1, smartphon_2])
+    cat = Category("Смартфоны", "Новые поступления на склад", [smartphon_1, smartphon_2, smartphon_3])
     print(cat)
 
 
-    print(len(cat))
-    print(cat.get_name())
-    print(cat.get_description())
-    print(cat.products_list)
+    # print(len(cat))
+    # print(cat.get_name())
+    # print(cat.get_description())
+    # print(cat.products_list)
+    print("Средняя цена смартфона = {:.2f}".format(cat.avg_price()))
+    exit()
 
     print('\nИнициализация объекта Garden_grass')
     Grass1 = Garden_grass("Овсяница красная", "Овсяница красная (Festuca rubra L.) - корневищный и рыхлокустовой низовой многолетний злак, вид травянистых растений семейства злаковых высотой до 60см",
@@ -94,7 +96,6 @@ def common_check():
     print(Grass2.get_product_description())
     print(Grass2.get_country())
 
-    return
 
     garden_grass_cat = Category("Трава газонная", "Наличие в магазине", [Grass1])
 
@@ -215,7 +216,7 @@ if __name__ == '__main__':
     """
         Проверка работы классов
     """
-    main()
+    # main()
 
-    # common_check()
+    common_check()
 
