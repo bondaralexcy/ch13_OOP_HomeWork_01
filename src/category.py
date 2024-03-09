@@ -50,13 +50,29 @@ class Category:
             вместо продукта или его наследников любой другой объект"""
         if not isinstance(value, Product):
             raise TypeError("Добавлять можно только объекты класса Product и его наследников")
-
-        if value.quantity == 0:
-            raise ValueError("Tовар с нулевым количеством не может быть добавлен")
-
+        # Обрабатываем ситуацию с нулевым количеством товара
+        try:
+            if value.quantity == 0:
+                raise MyValueError
+        except MyValueError as e:
+            e.message = "Tовар с нулевым количеством не может быть добавлен"
+            print(e)
         else:
             self.__products.append(value)
             Category.products_count += 1
+            print(f'Товар "{value.name}" добавлен в категорию "{self.name}"')
+        finally:
+            print("Обработка добавления товара завершена")
+
+
+        # Этот код остался от выполнения задания №1
+        #
+        # if value.quantity == 0:
+        #     raise ValueError("Tовар с нулевым количеством не может быть добавлен")
+        #
+        # else:
+        #     self.__products.append(value)
+        #     Category.products_count += 1
 
     @property
     def products_list(self):
@@ -106,11 +122,11 @@ class CategoryIter:
             raise StopIteration
 
 
-class ValueError(Exception):
-    """класс исключения """
-
+class MyValueError(Exception):
+    """ Пользовательский класс обработки исключения """
+    message = ""
     def __init__(self, *args, **kwargs):
-        self.message = args[0] if args else 'Неизвестная ошибка.'
+        self.message = args[0] if args else 'Что-то не так с параметрами объекта'
 
     def __str__(self):
         return self.message

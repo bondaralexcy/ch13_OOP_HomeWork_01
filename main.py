@@ -171,25 +171,25 @@ def main():
         "Xiaomi Redmi Note 11",
         "1024GB, Серебристый",
         32500.0,
-        2,
+        10,
         "10M fps",
         "Note 11",
         "1024GB",
         "Серебристый"
         )
 
-    print(smartphon_1.get_product_name())
-    print(len(smartphon_1))
-    print(smartphon_1.get_product_quantity())
-    print(smartphon_1.get_product_description())
-    print(smartphon_1.get_memory())
+    # print(smartphon_1.get_product_name())
+    # print(len(smartphon_1))
+    # print(smartphon_1.get_product_quantity())
+    # print(smartphon_1.get_product_description())
+    # print(smartphon_1.get_memory())
 
     smartphon_3 = Smartphone.new_product(
             {
                 "name": "Xiaomi Redmi Note 12",
                 "description": "1024GB, Синий",
                 "price": 50000,
-                "quantity": 25,
+                "quantity": 0,
                 "productivity": "20M fps",
                 "model": "Note 12",
                 "memory": "2048GB",
@@ -214,9 +214,9 @@ def main():
     #     )
     #
     cat = Category("Смартфоны", "Новые поступления на склад", [smartphon_3])
-    print(cat)
-    cat.add_product(smartphon_1)
-    print(cat)
+    # print(cat)
+    # cat.add_product(smartphon_1)
+    # print(cat)
 
 if __name__ == '__main__':
     """
