@@ -1,6 +1,7 @@
 
 from src.category import Category, CategoryIter
 from src.product import Product
+from src.order import Order
 from src.child_classes import Smartphone, Garden_grass, AnyProduct
 
 
@@ -69,7 +70,7 @@ def common_check():
     # print(cat.get_description())
     # print(cat.products_list)
     print("Средняя цена смартфона = {:.2f}".format(cat.avg_price()))
-    exit()
+
 
     print('\nИнициализация объекта Garden_grass')
     Grass1 = Garden_grass("Овсяница красная", "Овсяница красная (Festuca rubra L.) - корневищный и рыхлокустовой низовой многолетний злак, вид травянистых растений семейства злаковых высотой до 60см",
@@ -165,7 +166,7 @@ def common_check():
     print(f'Smartphon_3 + Smartphon_1 = {smartphon_3 + smartphon_1}')
     # print(f'Smartphon_3 + Grass2 = {smartphon_3 + Grass2}')
     # print(f'Grass1 + cap = {Grass1 + cap}')
-
+    print(f'cap + Grass1= {cap + Grass1}')
 def main():
     smartphon_1 = Smartphone(
         "Xiaomi Redmi Note 11",
@@ -220,19 +221,23 @@ def main():
 
 
 def check_order():
-    # Создание новой пустой категории
-    new_cat = Category.create({"name": "Cмартфоны", "description": "Новые поступления на склад"})
-    print(new_cat)
-    print(new_cat.products_list)
-    print(f"Количество категорий: {new_cat.category_count}")
-    print(f"Количество продуктов: {new_cat.products_count}")
+    smartphon_1 = Smartphone(
+        "Xiaomi Redmi Note 11",
+        "1024GB, Серебристый",
+        32500.0,
+        10,
+        "10M fps",
+        "Note 11",
+        "1024GB",
+        "Серебристый"
+        )
 
     smartphon_3 = Smartphone.new_product(
             {
                 "name": "Xiaomi Redmi Note 12",
                 "description": "1024GB, Синий",
                 "price": 50000,
-                "quantity": 3,
+                "quantity": 0,
                 "productivity": "20M fps",
                 "model": "Note 12",
                 "memory": "2048GB",
@@ -240,14 +245,35 @@ def check_order():
             }
         )
 
-    new_cat.add_product(smartphon_3)
-    print(new_cat)
+    # Создание новой пустой категории
+    # new_cat = Category.create({"name": "Cмартфоны", "description": "Новые поступления на склад"})
+    # print(new_cat)
+    # print(new_cat.products_list)
+    # print(f"Количество категорий: {new_cat.category_count}")
+    # print(f"Количество продуктов: {new_cat.products_count}")
+    # new_cat.add_product(smartphon_3)
+    # print(new_cat)
+
+    # Создание нового пустого Заказа
+    order_1 = Order.create({"name": "Заказ №1", "description": "Новый заказ"})
+    print(order_1)
+    print()
+    order_1 .add_product(smartphon_3)
+    print(order_1)
+    print()
+    order_1 .add_product(smartphon_1)
+    print(order_1)
+
+    print()
+    # order_1 = Order.create({"name": "Заказ №1", "description": "Новый заказ"})
+    order_1 .add_product(smartphon_1)
+    print(order_1)
 
 if __name__ == '__main__':
     """
         Проверка работы классов
     """
     # main()
-    # common_check()
-    check_order()
+    common_check()
+    # check_order()
 
