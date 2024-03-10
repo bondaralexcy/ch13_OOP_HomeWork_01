@@ -218,11 +218,36 @@ def main():
     # cat.add_product(smartphon_1)
     # print(cat)
 
+
+def check_order():
+    # Создание новой пустой категории
+    new_cat = Category.create({"name": "Cмартфоны", "description": "Новые поступления на склад"})
+    print(new_cat)
+    print(new_cat.products_list)
+    print(f"Количество категорий: {new_cat.category_count}")
+    print(f"Количество продуктов: {new_cat.products_count}")
+
+    smartphon_3 = Smartphone.new_product(
+            {
+                "name": "Xiaomi Redmi Note 12",
+                "description": "1024GB, Синий",
+                "price": 50000,
+                "quantity": 3,
+                "productivity": "20M fps",
+                "model": "Note 12",
+                "memory": "2048GB",
+                "color": "Синий"
+            }
+        )
+
+    new_cat.add_product(smartphon_3)
+    print(new_cat)
+
 if __name__ == '__main__':
     """
         Проверка работы классов
     """
-    main()
-
+    # main()
     # common_check()
+    check_order()
 

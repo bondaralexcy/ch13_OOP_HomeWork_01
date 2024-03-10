@@ -1,7 +1,33 @@
+from abc import ABC, abstractmethod
 from src.product import Product
 
 
-class Category:
+class BaseCategory(ABC):
+    """ Абстрактный общий класс для классов Category и Order"""
+
+    # Определяем абстрактные методы класса
+    @classmethod
+    @abstractmethod
+    def create(cls, value):
+        """ Создание нового пустого объекта данного класса
+        :param name: Имя экземпляра класса
+        :param description: Описание
+        """
+        pass
+
+    # Определяем абстрактные методы
+    @abstractmethod
+    def get_name(self):
+        """ Получить наименование класса"""
+        pass
+
+    @abstractmethod
+    def get_products(self):
+        """ Возвращает список продуктов, сохраненных в данном классе"""
+        pass
+
+
+class Category(BaseCategory):
     """
         Класс категории продуктов
     """
@@ -16,7 +42,7 @@ class Category:
         """Метод для инициализации экземпляра класса Category. Задаем значения атрибутам экземпляра."""
         self.name = name
         self.description = description
-        self.__products = []    # Пустой список объектов класса Product
+        self.__products = []  # Пустой список объектов класса Product
         # self.__products = products  # Список объектов класса Product
         for product in products:
             self.add_product(product)
@@ -24,14 +50,26 @@ class Category:
         Category.category_count += 1
         # Category.products_count += len(products)
 
+    @classmethod
+    def create(cls, value):
+        """ Создание новой пустой Категории продуктов
+        :param name: Имя экземпляра класса
+        :param description: Описание
+        :param product: Пустой список продуктов
+        """
+        name, description = (value["name"], value["description"])
+        products = []
+        return cls(name, description, products)
+
+        # return cls(**value, p)
+
     def __str__(self):
-        #Название категории, количество продуктов: 200 шт.
+        # Название категории, количество продуктов: 200 шт.
         return f'Класс: {__class__.__name__} \n  {self.name}, количество продуктов: {len(self)} шт.'
 
     def __len__(self):
         # Длина определена как количество объектов в данной категории товаров
         return len(self.get_products())
-
 
     def get_name(self):
         return self.name
@@ -43,7 +81,6 @@ class Category:
         # Возвращает список продуктов, сохраненных в данной категории
         return self.__products
 
-
     def add_product(self, value):
         """Метод добавляет продукт в список продуктов __products
             Доработан по требованию задания 15.1 чтобы не было возможности добавить
@@ -53,8 +90,8 @@ class Category:
         # Обрабатываем ситуацию с нулевым количеством товара
         try:
             if value.quantity == 0:
-                raise MyValueError
-        except MyValueError as e:
+                raise ZeroQuantityError
+        except ZeroQuantityError as e:
             e.message = "Tовар с нулевым количеством не может быть добавлен"
             print(e)
         else:
@@ -63,7 +100,6 @@ class Category:
             print(f'Товар "{value.name}" добавлен в категорию "{self.name}"')
         finally:
             print("Обработка добавления товара завершена")
-
 
         # Этот код остался от выполнения задания №1
         #
@@ -99,13 +135,16 @@ class Category:
         except ZeroDivisionError:
             return 0
 
+
 class CategoryIter:
     """
     Класс итерации продуктов в заданной категории
     """
     ctg: Category
+
     def __init__(self, ctg):
         self.ctg = ctg
+
     def __iter__(self):
         self.stop_num = len(self.ctg)
         self.cur_value = -1
@@ -122,12 +161,12 @@ class CategoryIter:
             raise StopIteration
 
 
-class MyValueError(Exception):
+class ZeroQuantityError(Exception):
     """ Пользовательский класс обработки исключения """
     message = ""
+
     def __init__(self, *args, **kwargs):
         self.message = args[0] if args else 'Что-то не так с параметрами объекта'
 
     def __str__(self):
         return self.message
-
